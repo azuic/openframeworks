@@ -2,6 +2,8 @@
 ##### Spring 2019
 ##### Parsons School of design
 
+Basics of C++ and use OpenFrameworks to program animation and interactions
+
 ##### Assignments
 - [x] Week 1
 - [x] Week 2
@@ -18,3 +20,5 @@
 - [ ] Week 13
 - [ ] Week 14
 - [ ] Week 15
+
+![](of.jpeg)
