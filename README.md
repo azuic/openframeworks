@@ -1,9 +1,10 @@
 #### Creative Coding: OF
 ##### Spring 2019
+##### Parsons School of design
 
 ##### Assignments
 - [x] Week 1
-- [ ] Week 2
+- [x] Week 2
 - [ ] Week 3
 - [ ] Week 4
 - [ ] Week 5
