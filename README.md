@@ -21,4 +21,4 @@ Basics of C++ and use OpenFrameworks to program animation and interactions
 - [ ] Week 14
 - [ ] Week 15
 
-<img src="of.png" width="400">
+<img src="of.jpeg" width="400">
