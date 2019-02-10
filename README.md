@@ -1,13 +1,14 @@
 #### Creative Coding: OF
 ##### Spring 2019
 ##### Parsons School of design
+###### Major: MS Data Visualization
 
 Basics of C++ and use OpenFrameworks to program animation and interactions
 
 ##### Assignments
 - [x] Week 1
 - [x] Week 2
-- [ ] Week 3
+- [x] Week 3
 - [ ] Week 4
 - [ ] Week 5
 - [ ] Week 6
