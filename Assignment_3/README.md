@@ -19,7 +19,7 @@
 1. Audience: People who like to sing and play games
 2. Input will be the amplitude taken from the mic, which will influence the size of the squares.
 3. When users making an louder voice input, the shaded squares will be larger and the perfect fit will be the exact size of the outline squares.
-4. Sketch:  
+4. Sketch:
    <img src="./sketch3.jpg" width="400">
 
 #### Object sketches
