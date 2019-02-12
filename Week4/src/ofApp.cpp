@@ -4,7 +4,7 @@ float side, length;
 //float counter;
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetFrameRate(6000);
+    ofSetFrameRate(60);
     x = 0.000;
     y = 0.000;
     side = 30.000;
@@ -77,6 +77,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }
