@@ -73,14 +73,20 @@ void ofApp::update(){
     // change direction and play the sound when you hit a side.
     
     // How would you speed the ball up?
-    if ((dist + l1*2)>=ofGetWidth() || dist <= 200){
-        dir *= -1;
-//        counter = counter-0.33f;
-    }
-    counter += 0.33f;
+
+    counter = ofMap(dist,l1*2,ofGetWidth()-l1*2,1,30);
     dist += counter*dir;
+//    if ((dist + l1*2) >= ofGetWidth()){
+//        dist -= counter;
+//    } else if (dist <= 200){
     
-    if (dist==200) {  // every 500th update, play sound
+//    }
+    if ((dist + l1*2) >= ofGetWidth() || dist <= 200) {
+        dir *= -1;
+    }
+    
+//    dist += counter*dir;
+    if (dist<=200) {  // every 500th update, play sound
         boop.play();
     }
     
@@ -102,7 +108,7 @@ void ofApp::draw(){
     
     ofBackground(0);
     ofSetLineWidth(2.0);  // Line widths apply to polylines
-    ofSetColor(255,100,0);
+//    ofSetColor(255,100,0);
 //    straightSegmentPolyline.draw();  // This is how we draw polylines
 //    curvedSegmentPolyline.draw();  // Nice and easy, right?
     
@@ -111,6 +117,7 @@ void ofApp::draw(){
     midY1 = midY;
     midY2 = midY;
     ofPolyline closedShapePolyline1, closedShapePolyline2;
+    
     closedShapePolyline1.addVertex(midX1, midY1+l1);
     closedShapePolyline1.addVertex(midX1+l2/2, midY1+l3/2);
     closedShapePolyline1.addVertex(midX1+l1, midY1);
@@ -130,7 +137,9 @@ void ofApp::draw(){
     closedShapePolyline2.addVertex(midX2-l1, midY2);
     closedShapePolyline2.addVertex(midX2-l2/2, midY2+l3/2);
     closedShapePolyline2.close();  // Connect first and last vertices
+    ofSetColor(255,100,0);
     closedShapePolyline1.draw();
+    ofSetColor(255,255,255);
     closedShapePolyline2.draw();
 }
 
