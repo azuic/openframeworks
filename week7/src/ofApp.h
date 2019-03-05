@@ -22,8 +22,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-        ofxVec2Slider center;
-        ofxFloatSlider radius;
+//        ofxVec2Slider center;
+        ofxIntSlider radius;
         ofxPanel gui;
-		
+
 };

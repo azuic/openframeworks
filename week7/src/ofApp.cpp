@@ -3,8 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     gui.setup(); // most of the time you don't need a name
-    gui.add(center.setup("center", ofVec2f(ofGetWidth()*.5, ofGetHeight()*.5), ofVec2f(0, 0), ofVec2f(ofGetWidth(), ofGetHeight())));
-    gui.add(radius.setup("radius", 140, 10, 300));
+//    gui.add(center.setup("center", ofVec2f(ofGetWidth()*.5, ofGetHeight()*.5), ofVec2f(0, 0), ofVec2f(ofGetWidth(), ofGetHeight())));
+    gui.add(radius.setup("radius", 140, 5, 300));
 }
 
 //--------------------------------------------------------------
@@ -15,7 +15,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetCircleResolution(100);
-    ofDrawCircle((ofVec2f)center, radius );
+    ofDrawCircle(ofVec2f(ofGetWidth()*.5, ofGetHeight()*.5), radius );
     gui.draw();
 }
 
