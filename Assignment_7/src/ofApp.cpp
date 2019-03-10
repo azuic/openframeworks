@@ -53,21 +53,12 @@ void ofApp::setup(){
 
 void ofApp::update(){
     
-    sec = ofGetFrameNum() / 60;
-    show = sec % 2 == 0;
-//    if (showcry){
-//        ind = 1;
-//    } else if (showangry){
-//        ind = 2;
-//    } else if (showconfuse){
-//        ind = 3;
-//    } else if (showseesaw) {
-//        ind = 4;
-//    }
+    sec = ofGetFrameNum() % 4;
+
     mid = (ofVec2f)center;
     // teardrops
-    fallspeed = ofMap(tearY, tearStart, tearEnd, 1, 10);
-    tearY += fallspeed*degree;
+    fallspeed = ofMap(tearY, tearStart, tearEnd, 1, 10*degree);
+    tearY += fallspeed;
     if (tearY >= tearEnd){
         tearY = tearStart;
     }
@@ -110,8 +101,12 @@ void ofApp::draw(){
     gui.draw();
     if (showcry){
             // crying hedgehog
+
             cry.play();
             cry.setVolume(volumn);
+        ofPopMatrix(); 
+        ofRotateYDeg(ofGetFrameNum()%360);
+        ofPushMatrix();
             ofSetHexColor(0x000000);
             ofFill();
             ofDrawCircle(mid.x, mid.y-25, 10); // nose
@@ -166,54 +161,61 @@ void ofApp::draw(){
         
     } else if (showangry) {
             // angry hedgehog
-            fire.play();
-            fire.setVolume(volumn);
-            ofSetHexColor(0x000000);
-            ofFill();
-            ofDrawCircle(mid.x, mid.y-25, 10); // nose
-            ofSetColor(ofRandom(100,255),0,0);
+        fire.play();
+        fire.setVolume(volumn);
+        ofSetHexColor(0x000000);
+        ofFill();
+        ofDrawCircle(mid.x, mid.y-25, 10); // nose
+        
+        ofSetHexColor(0x000000);
+        ofNoFill();
+        ofSetLineWidth(3);
+        ofDrawBezier(mid.x-100, mid.y-50, mid.x-120, mid.y-70,
+                     mid.x-105, mid.y-85, mid.x-90, mid.y-75); // left ear
+        ofDrawBezier(mid.x+100, mid.y-50, mid.x+120, mid.y-70,
+                     mid.x+105, mid.y-85, mid.x+90, mid.y-75); // right ear
+        
+        ofSetLineWidth(2);
+        ofPolyline rightHand, leftHand;
+        leftHand.addVertex(mid.x-75, mid.y+35);
+        leftHand.bezierTo(mid.x-15, mid.y+45,
+                          mid.x-17.5, mid.y+60, mid.x-90, mid.y+43);
+        rightHand.addVertex(mid.x+75, mid.y+35);
+        rightHand.bezierTo(mid.x+15, mid.y+45,
+                           mid.x+17.5, mid.y+60, mid.x+90, mid.y+43);
+        leftHand.draw();
+        rightHand.draw();
+        ofDrawBezier(mid.x-65, mid.y+145, mid.x-55, mid.y+190,
+                     mid.x-35, mid.y+180, mid.x-25, mid.y+150); // leftfoot
+        ofDrawBezier(mid.x+65, mid.y+145, mid.x+55, mid.y+190,
+                     mid.x+35, mid.y+180, mid.x+25, mid.y+150); // rightfoot
+        ofSetColor(color);
+        ofSetLineWidth(2);
+        float r = 150;
+        float angle = 360/60;
+        for (int i=0; i < 60; i++){
+            float l = ofRandom(0, 20);
+            ofDrawLine(mid.x+r*sin(angle*i), mid.y+r*cos(angle*i),
+                       mid.x+(r+l)*sin(angle*i), mid.y+(r+l)*cos(angle*i));
+        }
+        float angle2 = 360/50;
+        for (int i=0; i < 60; i++){
+            float l = ofRandom(0, 20);
+            ofDrawLine(mid.x+r*sin(angle2*i), mid.y+r*cos(angle2*i),
+                       mid.x+(r+l)*sin(angle2*i), mid.y+(r+l)*cos(angle2*i));
+        }
+        ofSetColor(ofRandom(10*degree,255),0,0);
+        ofFill();
+        ofPopMatrix();
+            ofRotateDeg(ofGetFrameNum()%360,0,0,1);
+            ofTranslate(0,0,0);
+//            mid = ofVec2f(ofGetWidth()/2,ofGetHeight()/2);
             ofDrawTriangle(mid+ofVec2f(-50,-40), mid+ofVec2f(-62,-60),
                            mid+ofVec2f(-38,-60));
             ofDrawTriangle(mid+ofVec2f(50,-40), mid+ofVec2f(62,-60),
                            mid+ofVec2f(38,-60));
-            
-            ofSetHexColor(0x000000);
-            ofNoFill();
-            ofSetLineWidth(3);
-            ofDrawBezier(mid.x-100, mid.y-50, mid.x-120, mid.y-70,
-                         mid.x-105, mid.y-85, mid.x-90, mid.y-75); // left ear
-            ofDrawBezier(mid.x+100, mid.y-50, mid.x+120, mid.y-70,
-                         mid.x+105, mid.y-85, mid.x+90, mid.y-75); // right ear
+        ofPushMatrix();
 
-            ofSetLineWidth(2);
-            ofPolyline rightHand, leftHand;
-            leftHand.addVertex(mid.x-75, mid.y+35);
-            leftHand.bezierTo(mid.x-15, mid.y+45,
-                              mid.x-17.5, mid.y+60, mid.x-90, mid.y+43);
-            rightHand.addVertex(mid.x+75, mid.y+35);
-            rightHand.bezierTo(mid.x+15, mid.y+45,
-                               mid.x+17.5, mid.y+60, mid.x+90, mid.y+43);
-            leftHand.draw();
-            rightHand.draw();
-            ofDrawBezier(mid.x-65, mid.y+145, mid.x-55, mid.y+190,
-                         mid.x-35, mid.y+180, mid.x-25, mid.y+150); // leftfoot
-            ofDrawBezier(mid.x+65, mid.y+145, mid.x+55, mid.y+190,
-                         mid.x+35, mid.y+180, mid.x+25, mid.y+150); // rightfoot
-            ofSetColor(color);
-            ofSetLineWidth(2);
-            float r = 150;
-            float angle = 360/60;
-            for (int i=0; i < 60; i++){
-                float l = ofRandom(0, 20);
-                ofDrawLine(mid.x+r*sin(angle*i), mid.y+r*cos(angle*i),
-                           mid.x+(r+l)*sin(angle*i), mid.y+(r+l)*cos(angle*i));
-            }
-            float angle2 = 360/50;
-            for (int i=0; i < 60; i++){
-                float l = ofRandom(0, 20);
-                ofDrawLine(mid.x+r*sin(angle2*i), mid.y+r*cos(angle2*i),
-                           mid.x+(r+l)*sin(angle2*i), mid.y+(r+l)*cos(angle2*i));
-            }
     } else if (showconfuse) {
             // dizzy hedgehog
         
@@ -224,7 +226,7 @@ void ofApp::draw(){
             ofFill();
             ofDrawCircle(mid.x, mid.y-25, 10); // nose
         
-        ofPopMatrix();
+        ofPushMatrix();
         ofTranslate(sin(ofGetFrameNum()), cos(ofGetFrameNum()));
             ofNoFill();
             ofDrawCircle(mid.x-50, mid.y-50, 10);
@@ -236,7 +238,7 @@ void ofApp::draw(){
             ofDrawCircle(mid.x+50, mid.y-50, rad1); // right eye
             ofDrawCircle(mid.x-50, mid.y-50, rad2); // left eye
             ofDrawCircle(mid.x+50, mid.y-50, rad2); // right eye
-        ofPushMatrix();
+        ofPopMatrix();
             ofSetLineWidth(3);
             ofDrawBezier(mid.x-100, mid.y-50, mid.x-120, mid.y-70,
                          mid.x-105, mid.y-85, mid.x-90, mid.y-75); // left ear
