@@ -23,6 +23,7 @@ void ofApp::setup(){
     {
         
         currentT = json["currently"]["time"].asInt();
+        cout<<"Epoch time: ";
         cout<<currentT<<endl;
         time ( &currentT );
         ptm1 = gmtime ( &currentT );
@@ -47,17 +48,19 @@ void ofApp::setup(){
                sunriseH,sunriseM);
         printf("Sunset: %02d:%02d\n",
                sunsetH,sunsetM);
-//        puts("Weather: ");
-//        printf("Temperature: %.", )
-        cout<<json["currently"]<<endl;
-        cout<<json["daily"]["data"][0]<<endl;
-        for (Json::ArrayIndex i = 0; i < 24; i++){
-            rawtime = json["hourly"]["data"][i]["time"].asInt();
-            ptm = gmtime ( &rawtime );
-            dd = ptm->tm_mday;
-            hr = (ptm->tm_hour+CET)%24;
-            printf("Date: %02d; Hour: %02d\n",dd,hr);
-        }
+        puts("Weather: ");
+        printf("Temperature: %.2f Fahrenheit\n", json["currently"]["temperature"].asFloat());
+        printf("Cloud cover: %.2f\n", json["currently"]["cloudCover"].asFloat());
+        printf("Humidity: %.2f", json["currently"]["humidity"].asFloat());
+//        cout<<json["currently"]<<endl;
+//        cout<<json["daily"]["data"][0]<<endl;
+//        for (Json::ArrayIndex i = 0; i < 24; i++){
+//            rawtime = json["hourly"]["data"][i]["time"].asInt();
+//            ptm = gmtime ( &rawtime );
+//            dd = ptm->tm_mday;
+//            hr = (ptm->tm_hour+CET)%24;
+//            printf("Date: %02d; Hour: %02d\n",dd,hr);
+//        }
 
 //        ofLogNotice("ofApp::setup") << json.getRawString(true);
     } else {
@@ -67,8 +70,8 @@ void ofApp::setup(){
     ofBackground(255, 255, 255);
     gui.setup();
     gui.add(cloud.setup("Cloud Cover", json["currently"]["cloudCover"].asFloat(), 0, 1));
-    gui.add(temperature.setup("Temperature", json["currently"]["temperature"].asFloat(), 20.0, 70.0));
-    gui.add(hour.setup("A 24-h period", currentH, 0, 23));
+    gui.add(temperature.setup("Temperature", json["currently"]["temperature"].asFloat(), json["daily"]["data"][0]["temperatureLow"].asFloat(), json["daily"]["data"][0]["temperatureHigh"].asFloat()));
+    gui.add(hour.setup("Hour of day", currentH, 0, 23));
     gui.add(current.setup("Realtime", true));
     gui.add(sunrise.setup("Sunrise", false));
     gui.add(sunset.setup("Sunset", false));
@@ -90,15 +93,15 @@ void ofApp::draw(){
 //    ofDrawRectangle(0, 0, ofGetWindowWidth()/24*(hour+1), ofGetWindowHeight());
     ofSetColor(255, 69, 0);
     ofDrawRectangle(0, ofGetWindowHeight()/2-10,
-                    ofGetWindowWidth()/24*(currentH+1), temperature);
+                    ofGetWindowWidth()/24*(currentH+currentMin/60), temperature);
     ofSetColor(255, 165, 0);
     ofSetCircleResolution(100);
     if (sunrise){
-        ofDrawCircle(ofGetWindowWidth()/24*(sunriseH+1), ofGetWindowWidth()/2-100, 50);
+        ofDrawCircle(ofGetWindowWidth()/24*(sunriseH+sunriseM/60), ofGetWindowWidth()/2-120, 50);
     }
     ofSetColor(255, 215, 0);
     if (sunset){
-        ofDrawCircle(ofGetWindowWidth()/24*(sunsetH+1), ofGetWindowWidth()/2-100, 50);
+        ofDrawCircle(ofGetWindowWidth()/24*(sunsetH+sunsetM/60), ofGetWindowWidth()/2-120, 50);
     }
     gui.draw();
 //    for (Json::ArrayIndex i = 0; i < json["response"]["docs"].size(); ++i)
