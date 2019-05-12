@@ -6,11 +6,13 @@
   * May create some nostalgia for German speakers
   * [Watch on Vimeo](https://vimeo.com/335651239)
   <img src="./hedgehogs.png" width="400">
+
 2. [A visualization](https://github.com/azuic/openframeworks/tree/master/Assignment_14/Project_2)
   * Real-time wind visualization using data from DarkSky API
   * Donut-shaped particle representation of wind speed, gust and bearing of New York, Ann Arbor, San Diego and Nantong, the four cities I am living/have lived in
   * The relative position matches the real geographical coordinates
   <img src="./WindDonuts.gif" width="400">
+
 3. [A game](https://github.com/azuic/openframeworks/tree/master/Assignment_14/Project_3)
   * Beats games are all over the place
   * A more difficult one can be disigned using FFT
