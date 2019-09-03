@@ -12,14 +12,14 @@ Basics of C++ and use OpenFrameworks to program animation and interactions
 - [x] Week 4
 - [x] Week 5
 - [x] Week 6
-- [ ] Week 7
-- [ ] Week 8
-- [ ] Week 9
-- [ ] Week 10
-- [ ] Week 11
-- [ ] Week 12
-- [ ] Week 13
-- [ ] Week 14
-- [ ] Week 15
+- [x] Week 7
+- [x] Week 8
+- [x] Week 9
+- [x] Week 10
+- [x] Week 11
+- [x] Week 12
+- [x] Week 13
+- [x] Week 14
+- [x] Week 15
 
 <img src="./of.jpeg" width="200">
